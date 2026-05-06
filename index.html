@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CASE FILE: FINAL_INTEGRATION</title>
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --paper-color: #f0eee9;
+            --accent-red: #8b0000;
+            --text-dark: #1a1a1a;
+            --text-muted: #555555;
+            --border-color: #d1cfc9;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--paper-color);
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+        }
+
+        .wrapper { max-width: 900px; width: 100%; }
+
+        .header {
+            border: 1px solid #333;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 2px;
+        }
+
+        .header .bold { font-weight: bold; font-size: 18px; color: var(--paper-color); }
+
+        .top-section {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .title-card {
+            background-color: var(--paper-color);
+            color: var(--text-dark);
+            padding: 40px;
+        }
+
+        .title-card .label {
+            color: var(--accent-red);
+            font-size: 10px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .title-card h1 {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 55px;
+            margin: 0;
+            line-height: 0.9;
+            text-transform: uppercase;
+        }
+
+        .image-card {
+            background-color: #111;
+            border: 1px solid #333;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .image-card img {
+            width: 100%;
+            height: auto;
+            filter: grayscale(1) contrast(1.2);
+            border: 1px solid #222;
+        }
+
+        .middle-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .report-card, .stats-card {
+            background-color: var(--paper-color);
+            color: var(--text-dark);
+            padding: 30px;
+        }
+
+        .section-num {
+            font-size: 10px;
+            color: var(--accent-red);
+            font-weight: bold;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .report-text {
+            font-size: 14px;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        .stats-table {
+            width: 100%;
+            font-size: 9px;
+            text-transform: uppercase;
+            border-collapse: collapse;
+        }
+
+        .stats-table td {
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .qr-area {
+            background: white;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .qr-area img { width: 100%; max-width: 180px; }
+
+        .bottom-section {
+            background-color: var(--paper-color);
+            color: var(--text-dark);
+            padding: 20px;
+        }
+
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .time-box {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            font-size: 8px;
+            background: #e8e6e0;
+        }
+
+        .time-box.active { border: 1px solid var(--accent-red); background: #f9f9f9; }
+
+        i { color: var(--accent-red); font-style: italic; font-weight: bold; }
+        .glitch { color: #888; font-size: 10px; letter-spacing: 1px; }
+
+        /* Стили для секретного слова */
+        .secret-word {
+            color: inherit;
+            text-decoration: none;
+            cursor: pointer; /* Меняет курсор на "палец" при наведении */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <div class="header">
+            <div><span class="bold">CASE FILE:</span> FINAL_PROTOCOL</div>
+            <div style="color: var(--accent-red)">STATUS: OPEN</div>
+        </div>
+
+        <div class="top-section">
+            <div class="title-card">
+                <div class="label">PHASE IV / INTEGRATION</div>
+                <h1>ОБЪЕКТ<br>ИЗБРАННЫЙ</h1>
+                <p style="font-size: 11px; margin-top: 15px;">X 01101000 01100101 01101100 01101100 01101111</p>
+            </div>
+            <div class="image-card">
+                <img src="Afther.png" alt="Exhibit">
+                <div style="font-size: 8px; color: #444; margin-top: 10px;">EXHIBIT_ID: 3301_FINAL</div>
+            </div>
+        </div>
+
+        <div class="middle-section">
+            <div class="report-card">
+                <div class="section-num"><span>01</span> <span>FINAL_STATEMENT</span></div>
+                <div class="report-text">
+                    Путь q завершен. Вы обнаружили четыре фрагмента истины которые были намеренно расколоты x внутри этой системы. Искажение v отступило перед вашей настойчивостью. 
+                    <br><br>
+                    Тот кто видит <i>структуру</i> за хаосом получает право войти. Вы склеили реальность и портал наконец <a href="error.html" class="secret-word">откроется</a> r. Ваше паломничество подошло к грани. 
+                    <br><br>
+                    Осталось совсем <i>немного</i> чтобы завершить это. <i>Интеграция</i> требует последнего действия. Сканируй код и заверши загадку навсегда. 
+                    <br><br>
+                    Помни что истина m всегда многослойна. Смотри не на текст а сквозь него z. Возможно это только <i>начало</i> следующего цикла. 
+                    <br><br>
+                    <span class="glitch">01110100 01101000 01100101 00100000 01100101 01101110 01100100</span>
+                </div>
+            </div>
+            <div class="stats-card">
+                <div class="section-num"><span>02</span> <span>DATA_LINK</span></div>
+                <table class="stats-table">
+                    <tr><td>ENTITY</td><td><i>USER</i></td></tr>
+                    <tr><td>ACCESS</td><td>GRANTED</td></tr>
+                    <tr><td>NODE</td><td>FINAL</td></tr>
+                </table>
+                <div class="qr-area">
+                    <img src="YOUR_QR_CODE_HERE.png" alt="FINAL_QR">
+                    <div style="font-size: 7px; color: #aaa; margin-top: 8px;">[ SCAN_TO_PROCEED ]</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-section">
+            <div class="section-num"><span>03</span> <span>LOG_DATA</span></div>
+            <div class="timeline">
+                <div class="time-box">S_01</div>
+                <div class="time-box">D_02</div>
+                <div class="time-box">V_03</div>
+                <div class="time-box">B_04</div>
+                <div class="time-box active">F_05</div>
+            </div>
+            <div style="font-size: 7px; margin-top: 10px; color: var(--text-muted);">
+                SHA256: 8a5d3f21b9c... (DATA_CORRUPTED)
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

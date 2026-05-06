@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Не удается получить доступ к сайту</title>
+    <style>
+        /* Стили под обычную ошибку браузера (Chrome) - Изначальное состояние */
+        body {
+            background-color: #ffffff;
+            color: #202124;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            margin: 0;
+            padding: 50px 10%;
+            user-select: none;
+            overflow: hidden; /* Важно для эффектов разрушения */
+            transition: background-color 0.5s ease;
+        }
+
+        #fake-error-page {
+            max-width: 600px;
+            position: relative;
+            transition: opacity 0.5s ease;
+        }
+
+        h1 { font-size: 1.6rem; font-weight: normal; margin-bottom: 10px; }
+        p { font-size: 1rem; line-height: 1.5; color: #5f6368; }
+        .blue-link { color: #1a73e8; cursor: pointer; text-decoration: none; }
+        .error-code { font-size: 0.8rem; color: #5f6368; margin-top: 30px; font-family: monospace; }
+        svg { margin-bottom: 20px; transition: fill 0.3s ease; }
+
+        /* --- ЭФФЕКТЫ ГЛИТЧА И КРАСНОГО ЦВЕТА (Стадия 1-3) --- */
+        .glitch-active {
+            animation: glitch 0.2s infinite;
+            color: #ff0000 !important;
+        }
+
+        .glitch-active h1, .glitch-active p, .glitch-active li, .glitch-active svg {
+            color: #ff0000 !important;
+            fill: #ff0000 !important;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(2px, 2px); }
+            25% { transform: translate(-2px, -2px); }
+            50% { transform: translate(1px, -1px); }
+            75% { transform: translate(-1px, 1px); }
+            100% { transform: translate(0px, 0px); }
+        }
+
+        /* Эффект цифровых "блоков", выпадающих из страницы */
+        .fall-block {
+            position: absolute;
+            background: #ff0000;
+            opacity: 0.8;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* --- СТИЛИ ДЛЯ ШИФРА CICADA3301 (Стадия 4+) --- */
+        #cipher-container {
+            display: none;
+            background-color: #000000;
+            color: #fff;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 40px;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 100;
+            opacity: 0;
+            transition: opacity 1s ease-in;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cipher-header {
+            color: #fff;
+            font-weight: bold;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-align: center;
+        }
+
+        .cipher-content {
+            border: 1px solid #333;
+            padding: 20px;
+            width: 80%;
+            max-width: 800px;
+            position: relative;
+            background: rgba(10, 10, 10, 0.9);
+        }
+
+        /* Эффект "сканирующей линии" */
+        .scan-line {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            animation: scan 4s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+
+        .cipher-text {
+            word-break: break-all;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            line-height: 1.6;
+            color: #888; /* Тусклый цвет, как битые данные */
+        }
+
+        /* Класс для "восстановленных" символов шифра */
+        .recovered {
+            color: #fff;
+            text-shadow: 0 0 5px #fff;
+            transition: color 0.5s ease;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="fake-error-page">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="#5f6368">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+        </svg>
+        
+        <h1>Не удается получить доступ к сайту</h1>
+        <p>Сайт <strong>c1t0b3l0110.github.io</strong> неожиданно разорвал соединение.</p>
+        
+        <p style="margin-top: 20px;">Попробуйте выполнить следующие действия:</p>
+        <ul style="color: #5f6368; line-height: 1.6;">
+            <li><span class="blue-link">Проверьте подключение к Интернету</span></li>
+            <li><span class="blue-link">Проверьте настройки прокси-сервера и брандмауэра</span></li>
+            <li>Выполните диагностику сети Windows</li>
+        </ul>
+
+        <div class="error-code">ERR_CONNECTION_CLOSED</div>
+    </div>
+
+    <div id="cipher-container">
+        <div class="cipher-header">
+            [ DATA_RECOVERY_PROTOCOL ]<br>
+            VERIFYING_INTEGRITY... SUCCESS.
+        </div>
+        
+        <div class="cipher-content">
+            <div class="scan-line"></div>
+            <div class="cipher-text" id="cipher-text-field"></div>
+        </div>
+        
+        <div style="margin-top: 30px; color: #333; font-size: 10px; text-transform: uppercase; letter-spacing: 2px;">
+            Epiphany is near. 3301
+        </div>
+    </div>
+
+    <script>
+        let clicks = 0;
+        const body = document.body;
+        const fakePage = document.getElementById('fake-error-page');
+        const cipherContainer = document.getElementById('cipher-container');
+        const textField = document.getElementById('cipher-text-field');
+        
+        // Твой секретный код Base64
+        const finalSecret = "VmxkM1QyUnRWbkpsUjBaWFlUSjRWbVJYZEdGV2JHUnpXWHBXVkZsc2JETlhhMUpvVmpKMGExWnRWak5UUm1oUVZsWmFSMWRXY0hKWFZtUlhUVlp3YVU1V1dsWmtNbXhYVjBaT1YxWnNXbGRYYlZKSVZsZDRhMVp0VmtS...";
+
+        // Функция для создания выпадающих цифровых блоков
+        function createFallingBlock() {
+            const block = document.createElement('div');
+            block.className = 'fall-block';
+            block.style.left = Math.random() * 100 + 'vw';
+            block.style.top = Math.random() * 50 + 'vh';
+            block.style.width = Math.random() * 20 + 5 + 'px';
+            block.style.height = Math.random() * 50 + 10 + 'px';
+            body.appendChild(block);
+
+            // Анимация падения
+            block.animate([
+                { transform: 'translateY(0) rotate(0deg)', opacity: 0.8 },
+                { transform: `translateY(100vh) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+            ], {
+                duration: Math.random() * 1000 + 1000,
+                easing: 'ease-in'
+            }).onfinish = () => block.remove();
+        }
+
+        // Отслеживаем клики в любом месте экрана
+        document.addEventListener('click', function() {
+            clicks++;
+
+            if (clicks <= 3) {
+                // С каждым кликом добавляем глитч и выпадающие блоки
+                fakePage.classList.add('glitch-active');
+                for (let i = 0; i < clicks * 5; i++) {
+                    createFallingBlock();
+                }
+
+                // Заменяем текст на случайные символы
+                if (clicks === 1) {
+                    document.querySelector('h1').innerText = "SYSTEM_FAILURE: RE@LITY_CO&&uPTED";
+                } else if (clicks === 2) {
+                    body.style.backgroundColor = "#1a0000"; // Темнеет, наливается красным
+                    document.querySelector('p').innerText = "01100100 01100001 01110100 01100001 01001111 01010010 01010010 01010101 01010000 01010100";
+                } else if (clicks === 3) {
+                    // Пиковая стадия разрушения
+                    fakePage.style.opacity = "0.1";
+                    fakePage.style.transform = "scale(1.1) rotate(1deg)";
+                }
+            } 
+            else if (clicks === 4) {
+                // СТАДИЯ 4: ПОЛНОЕ ОБРУШЕНИЕ И ПЕРЕХОД
+                fakePage.style.display = "none";
+                body.style.backgroundColor = "#000";
+                cipherContainer.style.display = "flex";
+                
+                // Плавно проявляем контейнер шифра
+                setTimeout(() => {
+                    cipherContainer.style.opacity = "1";
+                }, 100);
+
+                // ЗАПУСК ЭФФЕКТА ВОССТАНОВЛЕНИЯ ШИФРА
+                // 1. Сначала заполняем поле тусклыми символами-пустышками
+                let placeholderText = "";
+                for (let j = 0; j < finalSecret.length; j++) {
+                    // Используем символы, похожие на битые данные
+                    const corruptChars = "█▓▒░×Ø#@&*§";
+                    placeholderText += `<span id="char-${j}">${corruptChars[Math.floor(Math.random() * corruptChars.length)]}</span>`;
+                }
+                textField.innerHTML = placeholderText;
+
+                // 2. Постепенно "восстанавливаем" реальные символы Base64
+                let recoveredCount = 0;
+                const totalChars = finalSecret.length;
+                const indices = Array.from({length: totalChars}, (_, i) => i);
+                // Перемешиваем индексы, чтобы восстановление шло хаотично
+                indices.sort(() => Math.random() - 0.5);
+
+                function recoverData() {
+                    if (recoveredCount < totalChars) {
+                        const idx = indices[recoveredCount];
+                        const charSpan = document.getElementById(`char-${idx}`);
+                        charSpan.innerText = finalSecret[idx]; // Заменяем пустышку на реальный символ
+                        charSpan.classList.add('recovered'); // Делаем его ярким и белым
+                        recoveredCount++;
+                        
+                        // Скорость восстановления (чем больше код, тем быстрее надо)
+                        setTimeout(recoverData, 2); 
+                    }
+                }
+                
+                // Начинаем восстановление через секунду после появления терминала
+                setTimeout(recoverData, 1500);
+            }
+        });
+    </script>
+</body>
+</html>
